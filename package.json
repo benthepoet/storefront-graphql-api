@@ -20,6 +20,8 @@
   },
   "homepage": "https://github.com/benthepoet/storefront-graphql-api#readme",
   "dependencies": {
-    "koa": "^2.5.0"
+    "knex": "^0.14.6",
+    "koa": "^2.5.0",
+    "sqlite3": "^4.0.0"
   }
 }
