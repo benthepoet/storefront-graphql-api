@@ -1,6 +1,11 @@
 const Koa = require('koa');
+const graphqlRouter = require('./graphql');
+
 const app = new Koa();
 
-module.exports = app;
+app.use(graphqlRouter.routes());
+app.use(graphqlRouter.allowedMethods());
 
-app.listen(8040, () => console.log('API:READY'));
+app.listen(8080, () => console.log('API:READY'));
+
+module.exports = app;
