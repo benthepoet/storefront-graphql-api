@@ -1,0 +1,25 @@
+{
+  "name": "storefront-graphql-api",
+  "version": "1.0.0",
+  "description": "A basic storefront API implementation using GraphQL.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benthepoet/storefront-graphql-api.git"
+  },
+  "keywords": [
+    "graphql"
+  ],
+  "author": "Ben Hanna <benpaulhanna@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/benthepoet/storefront-graphql-api/issues"
+  },
+  "homepage": "https://github.com/benthepoet/storefront-graphql-api#readme",
+  "dependencies": {
+    "koa": "^2.5.0"
+  }
+}
