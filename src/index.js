@@ -1,7 +1,8 @@
 const Koa = require('koa');
 const jwt = require('koa-jwt');
-const graphqlRouter = require('./graphql');
+
 const config = require('./config');
+const graphqlRouter = require('./graphql');
 
 const app = new Koa();
 

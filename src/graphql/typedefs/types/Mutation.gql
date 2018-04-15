@@ -1,3 +1,4 @@
 type Mutation {
   createAuthToken(email: String!, password: String!): String
+  createUser(email: String!, password: String!): Int
 }

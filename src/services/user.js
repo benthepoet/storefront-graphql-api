@@ -1,7 +1,6 @@
 const bcrypt = require('bcryptjs');
 const jsonwebtoken = require('jsonwebtoken');
 
-const config = require('../config');
 const BaseService = require('./base');
 
 class UserService extends BaseService {
@@ -21,7 +20,7 @@ class UserService extends BaseService {
       throw authError;
     }
     
-    return jsonwebtoken.sign(user.id, config.jwt);
+    return jsonwebtoken.sign(user.id, this.config.jwt);
   }
   
   async createUser(email, password) {
@@ -51,6 +50,8 @@ class UserService extends BaseService {
     await this
       .knex('UserProfile')
       .insert(profile);
+      
+    return id;
   }
 }
 
