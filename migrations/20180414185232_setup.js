@@ -1,5 +1,5 @@
 
-exports.up = function(knex, Promise) {
+exports.up = (knex, Promise) => {
   return Promise.all([
     knex.schema.createTable('Permission', table => {
       table
@@ -76,7 +76,8 @@ exports.up = function(knex, Promise) {
       
       table
         .string('email')
-        .notNullable();
+        .notNullable()
+        .unique();
       
       table.string('firstName');
       table.string('lastName');
@@ -84,7 +85,7 @@ exports.up = function(knex, Promise) {
   ]);
 };
 
-exports.down = function(knex, Promise) {
+exports.down = (knex, Promise) => {
   return Promise.all([
     knex.schema.dropTable('Permission'),
     knex.schema.dropTable('Role'),
