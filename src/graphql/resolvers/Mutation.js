@@ -1,10 +1,9 @@
-const {
-  UserController, 
-  resolverFor
-} = require('../../controllers');
-
 module.exports = {
-  createAuthToken: resolverFor(UserController, 'authenticate'),
-  createUser: resolverFor(UserController, 'createUser')
+  createAuthToken(_, { email, password }, { UserController }) {
+    return UserController.authenticate(email, password);
+  },
+  createUser(_, { email, password }, { UserController }) {
+    return UserController.createUser(email, password);
+  }
 };
 

@@ -1,18 +1,16 @@
 const BaseController = require('./base');
 
-const { UserService } = require('../services');
-
 class UserController extends BaseController {
-  constructor() {
+  constructor(userService) {
     super();
-    this.userService = new UserService();
+    this.userService = userService;
   }
   
-  authenticate(_, { email, password }) {
+  authenticate(email, password) {
     return this.userService.authenticate(email, password);
   }
   
-  createUser(_, { email, password }) {
+  createUser(email, password) {
     return this.userService.createUser(email, password);
   }
 }
