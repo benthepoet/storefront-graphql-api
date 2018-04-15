@@ -7,8 +7,8 @@ module.exports = contextBuilder => {
   const router = new Router();
 
   const endpointURL = '/graphql';
-  const graphqlHandler = graphqlKoa(({ user }) => {
-    const context = contextBuilder(user);
+  const graphqlHandler = graphqlKoa(({ state }) => {
+    const context = contextBuilder(state.user);
     return {
       context,
       schema

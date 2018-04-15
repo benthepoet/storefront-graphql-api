@@ -6,8 +6,8 @@ class UserController extends BaseController {
     this.userService = userService;
   }
   
-  authenticate(email, password) {
-    return this.userService.authenticate(email, password);
+  createAuthToken(email, password) {
+    return this.userService.createAuthToken(email, password);
   }
   
   createUser(email, password) {

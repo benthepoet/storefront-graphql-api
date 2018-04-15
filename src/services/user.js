@@ -4,7 +4,7 @@ const jsonwebtoken = require('jsonwebtoken');
 const BaseService = require('./base');
 
 class UserService extends BaseService {
-  async authenticate(email, password) {
+  async createAuthToken(email, password) {
     const user = await this
       .knex('User')
       .first('id', 'hash')
