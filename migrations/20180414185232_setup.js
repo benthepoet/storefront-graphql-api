@@ -54,6 +54,11 @@ exports.up = (knex, Promise) => {
         .primary();
       
       table
+        .string('email')
+        .notNullable()
+        .unique();
+      
+      table
         .string('hash')
         .notNullable();
       
@@ -73,11 +78,6 @@ exports.up = (knex, Promise) => {
         .integer('roleId')
         .notNullable()
         .references('Role.id');
-      
-      table
-        .string('email')
-        .notNullable()
-        .unique();
       
       table.string('firstName');
       table.string('lastName');

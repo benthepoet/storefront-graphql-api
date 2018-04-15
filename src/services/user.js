@@ -6,16 +6,19 @@ const BaseService = require('./base');
 
 class UserService extends BaseService {
   async authenticate(email, password) {
-    const hash = bcrypt.hashSync(password);
-    
     const user = await this
       .knex('User')
-      .first('User.hash', 'User.id')
-      .innerJoin('UserProfile', 'User.id', 'UserProfile.id')
-      .where('UserProfile.email', email);
+      .first('id', 'hash')
+      .where({ email });
+      
+    const authError = new Error('The provided email and/or password is invalid.');
       
     if (user === undefined || user === null) {
-      throw new Error('The provided email and password are invalid.');
+      throw authError;
+    }
+    
+    if (!bcrypt.compareSync(password, user.hash)) {
+      throw authError;
     }
     
     return jsonwebtoken.sign(user.id, config.jwt);
@@ -23,9 +26,9 @@ class UserService extends BaseService {
   
   async createUser(email, password) {
     const existingUser = await this
-      .knex('UserProfile')
+      .knex('User')
       .first('id')
-      .where('email', email);
+      .where({ email });
       
     if (existingUser !== undefined && existingUser !== null) {
       throw new Error('The provided email is already in use.');
@@ -35,10 +38,12 @@ class UserService extends BaseService {
     
     const [id] = await this
       .knex('User')
-      .insert({ hash });
+      .insert({ 
+        email,
+        hash 
+      });
       
     const profile = {
-      email,
       id,
       roleId: 1
     };
