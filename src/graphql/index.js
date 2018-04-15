@@ -3,13 +3,14 @@ const bodyParser = require('koa-bodyparser');
 const Router = require('koa-router');
 const schema = require('./schema');
 
-module.exports = (buildContext) => {
+module.exports = contextBuilder => {
   const router = new Router();
 
   const endpointURL = '/graphql';
-  const graphqlHandler = graphqlKoa(ctx => {
+  const graphqlHandler = graphqlKoa(({ user }) => {
+    const context = contextBuilder(user);
     return {
-      context: buildContext(ctx.user),
+      context,
       schema
     };
   });

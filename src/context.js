@@ -5,7 +5,7 @@ const knex = require('./data/knex');
 const { UserController } = require('./controllers');
 const { UserService } = require('./services');
 
-module.exports.buildContext = (user) => {
+module.exports.contextBuilder = (user) => {
   const bottle = new Bottle();
   
   bottle.value('config', config);
