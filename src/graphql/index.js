@@ -8,13 +8,13 @@ const Router = require('koa-router');
 
 const resolvers = requireDir('./resolvers');
 const typeDefs = glob
-    .sync('src/**/*.gql')
-    .map(filename => fs.readFileSync(filename))
-    .join();
+  .sync('src/**/*.gql')
+  .map(filename => fs.readFileSync(filename))
+  .join();
 
 const schema = makeExecutableSchema({
-    resolvers,
-    typeDefs 
+  resolvers,
+  typeDefs 
 });
 
 const router = new Router();

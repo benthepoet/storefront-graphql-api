@@ -11,7 +11,9 @@
     "url": "git+https://github.com/benthepoet/storefront-graphql-api.git"
   },
   "keywords": [
-    "graphql"
+    "graphql",
+    "storefront",
+    "koa"
   ],
   "author": "Ben Hanna <benpaulhanna@gmail.com>",
   "license": "MIT",
@@ -27,6 +29,7 @@
     "knex": "^0.14.6",
     "koa": "^2.5.0",
     "koa-bodyparser": "^4.2.0",
+    "koa-jwt": "^3.3.1",
     "koa-router": "^7.4.0",
     "require-dir": "^1.0.0",
     "sqlite3": "^4.0.0"
