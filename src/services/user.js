@@ -20,7 +20,7 @@ class UserService extends BaseService {
       throw authError;
     }
     
-    return jsonwebtoken.sign(user.id, this.config.jwt);
+    return jsonwebtoken.sign(user.id, this.config.jwt.secret);
   }
   
   async createUser(email, password) {
