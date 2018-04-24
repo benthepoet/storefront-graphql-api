@@ -10,16 +10,20 @@ module.exports = contextBuilder => {
   const graphqlHandler = graphqlKoa(({ state }) => {
     const context = contextBuilder(state.user);
     return {
+      cacheControl: true,
       context,
       schema
     };
   });
   
+  router.get(endpointURL, cacher, graphqlHandler);
   router.post(endpointURL, bodyParser(), graphqlHandler);
-  router.get(endpointURL, graphqlHandler);
   
   router.get('/graphiql', graphiqlKoa({ endpointURL }));
   
   return router;
 };
 
+async function cacher(ctx, next) {
+  await next();
+}
