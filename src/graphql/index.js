@@ -34,7 +34,10 @@ function cacher() {
   
   return async (ctx, next) => {
     await next();
+    
     const minAge = getMinAge(ctx.body);
-    console.log(minAge);
+    if (!R.isNil(minAge) && minAge > 0) {
+      ctx.set('Cache-Control', `public, max-age=${minAge}`);
+    }
   };
 }
