@@ -7,9 +7,9 @@ const { UserService } = require('./services');
 
 module.exports.contextBuilder = (user) => {
   const { container } = new Injector()
-    .value('config', config)
-    .value('knex', knex)
-    .value('user', user)
+    .constant('config', config)
+    .constant('knex', knex)
+    .constant('user', user)
     .service(UserService, ['config', 'knex'])
     .service(UserController, [UserService.name]);
 

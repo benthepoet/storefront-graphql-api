@@ -1,6 +1,7 @@
 const { graphqlKoa, graphiqlKoa } = require('apollo-server-koa');
 const bodyParser = require('koa-bodyparser');
 const Router = require('koa-router');
+const R = require('ramda');
 const schema = require('./schema');
 
 module.exports = contextBuilder => {
@@ -16,7 +17,7 @@ module.exports = contextBuilder => {
     };
   });
   
-  router.get(endpointURL, cacher, graphqlHandler);
+  router.get(endpointURL, cacher(), graphqlHandler);
   router.post(endpointURL, bodyParser(), graphqlHandler);
   
   router.get('/graphiql', graphiqlKoa({ endpointURL }));
@@ -24,6 +25,16 @@ module.exports = contextBuilder => {
   return router;
 };
 
-async function cacher(ctx, next) {
-  await next();
+function cacher() {
+  const getMinAge = R.pipe(
+    R.path(['extensions', 'cacheControl', 'hints']),
+    R.map(R.prop('maxAge')),
+    R.reduce(R.min, Infinity)
+  );
+  
+  return async (ctx, next) => {
+    await next();
+    const minAge = getMinAge(ctx.body);
+    console.log(minAge);
+  };
 }
